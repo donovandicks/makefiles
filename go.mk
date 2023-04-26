@@ -3,6 +3,7 @@
 help:
 	@echo 'Targets:'
 	@echo ' install-tools	Install the development dependencies'
+	@echo ' init		Initialize a new go module'
 	@echo ' lint		Lint the codebase with golangci-lint'
 	@echo ' format		Format the codebase using gofumpt and golines'
 	@echo ' test		Run all tests'
@@ -14,6 +15,9 @@ install-tools:
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 	go install mvdan.cc/gofumpt@latest
 	go install github.com/segmentio/golines@latest
+
+init: install-tools
+	go mod init github.com/$(repo)
 
 lint:
 	golangci-lint run -c ./golangci.yml ./...
